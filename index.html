@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemical Equations & Stoichiometry | Learning Resource</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #1a237e;
+            --secondary: #3949ab;
+            --accent: #ff9800;
+            --light: #e8eaf6;
+            --dark: #0d153a;
+            --success: #00c853;
+            --warning: #ff9100;
+            --text: #1a0529;
+            --bg-light: #f5f7ff;
+            --card-bg: #ffffff;
+        }
+        
+        body {
+            background-color: var(--bg-light);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 0;
+            max-width: 100%;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Animated gradient background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(-45deg, #1a237e, #3949ab, #5c6bc0, #ff9800);
+            background-size: 400% 400%;
+            animation: gradient 18s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Floating background elements */
+        .floating-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            opacity: 0.15;
+            color: var(--accent);
+            font-size: 28px;
+            animation: float 25s infinite linear;
+        }
+        
+        .floating-bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 152, 0, 0.1);
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 25px 0;
+            text-align: center;
+            border-bottom: 8px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(57, 73, 171, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 152, 0, 0.2) 0%, transparent 50%);
+            z-index: 0;
+        }
+        
+        .logo {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent), #FFC107);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            padding: 0 10px;
+            word-wrap: break-word;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            padding: 0 10px;
+            font-weight: 300;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin: 30px 0 20px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid var(--secondary);
+            position: relative;
+            font-size: 1.8rem;
+        }
+        
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin: 25px 0 15px;
+            font-size: 1.5rem;
+        }
+        
+        h4 {
+            color: var(--primary);
+            margin: 18px 0 10px;
+            font-size: 1.2rem;
+        }
+        
+        .content-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            padding: 30px 0;
+            width: 100%;
+        }
+        
+        .card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 5px solid var(--secondary);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            backdrop-filter: blur(5px);
+        }
+        
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .intro-card {
+            background: linear-gradient(135deg, rgba(232, 234, 246, 0.95), rgba(197, 202, 233, 0.95));
+            border-left: 5px solid var(--accent);
+        }
+        
+        .definition-box {
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid var(--success);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            font-family: 'Cambria Math', serif;
+            font-size: 1.1rem;
+            border-left: 5px solid var(--accent);
+            overflow-x: auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .example-box {
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            border-left: 5px solid var(--success);
+            font-size: 1rem;
+            overflow-x: auto;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .concept-box {
+            background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid var(--warning);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .step-box {
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid var(--secondary);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .principle-box {
+            background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid var(--accent);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        .diagram-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #e0e0e0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .diagram {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border-radius: 10px;
+            overflow: hidden;
+            font-size: 0.95rem;
+            display: block;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        th {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9ff;
+        }
+        
+        tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            margin: 10px 5px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            font-size: 1rem;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        
+        .btn-accent {
+            background: linear-gradient(135deg, var(--accent), #FFC400);
+            color: var(--primary);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--success), #00B8A9);
+        }
+        
+        .quiz-section {
+            background: linear-gradient(135deg, rgba(232, 234, 246, 0.95), rgba(197, 202, 233, 0.95));
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid var(--accent);
+            width: 100%;
+        }
+        
+        .quiz-instructions {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid var(--warning);
+        }
+        
+        .quiz-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+        
+        .timer {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+            color: var(--accent);
+            background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+            padding: 12px;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f9f9ff;
+            border-radius: 10px;
+            border-left: 5px solid var(--secondary);
+        }
+        
+        .options {
+            margin-left: 0;
+        }
+        
+        .option {
+            margin: 12px 0;
+            padding: 15px;
+            background-color: #f5f7ff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+        
+        .option:hover {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .option.selected {
+            background-color: #bbdefb;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .option.correct {
+            background-color: #c8e6c9;
+            border-left: 4px solid var(--success);
+        }
+        
+        .option.incorrect {
+            background-color: #ffcdd2;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .results {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid var(--success);
+            width: 100%;
+        }
+        
+        .score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--success);
+            margin: 15px 0;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .feedback {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            text-align: left;
+        }
+        
+        .strength {
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .improvement {
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .resource-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 6px solid var(--accent);
+            width: 100%;
+        }
+        
+        .creator-link {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1rem;
+            color: var(--text);
+        }
+        
+        .creator-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .creator-link a:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        /* Step-by-step solution styling */
+        .solution-step {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f9f9ff;
+            border-radius: 5px;
+            border-left: 3px solid var(--secondary);
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            margin-right: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* Visual aid styling */
+        .visual-aid {
+            background: linear-gradient(135deg, #FFF8E1, #FFECB3);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px dashed var(--accent);
+            text-align: center;
+        }
+        
+        .aid-title {
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        /* Important note styling */
+        .important-note {
+            background: linear-gradient(135deg, #FFECB3, #FFE082);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 5px solid var(--warning);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        
+        /* Tutor section styling */
+        .tutor-section {
+            background: linear-gradient(135deg, rgba(232, 234, 246, 0.95), rgba(197, 202, 233, 0.95));
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid var(--secondary);
+            text-align: center;
+        }
+        
+        .tutor-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .tutor-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .tutor-details {
+            text-align: left;
+            max-width: 400px;
+        }
+        
+        .tutor-details h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* WhatsApp button styling */
+        .whatsapp-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            margin: 15px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            font-size: 1rem;
+            text-align: center;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #128C7E, #25D366);
+        }
+        
+        /* Tablet styles */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 720px;
+                padding: 0 20px;
+            }
+            
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            h3 {
+                font-size: 1.7rem;
+            }
+            
+            .card {
+                padding: 30px;
+            }
+            
+            .content-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+            
+            .wide-card {
+                grid-column: 1 / -1;
+            }
+            
+            table {
+                font-size: 1rem;
+                display: table;
+                overflow-x: visible;
+                white-space: normal;
+            }
+        }
+        
+        /* Desktop styles */
+        @media (min-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+            
+            h1 {
+                font-size: 3.2rem;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 35px;
+            }
+            
+            .card {
+                padding: 30px;
+            }
+        }
+        
+        /* Large desktop styles */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+        
+        /* Small mobile adjustments */
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            header {
+                padding: 20px 0;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .tagline {
+                font-size: 1rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .btn, .whatsapp-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                display: block;
+                width: 100%;
+                margin: 8px 0;
+            }
+            
+            .resource-links {
+                flex-direction: column;
+            }
+            
+            .tutor-info {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .tutor-details {
+                text-align: center;
+            }
+        }
+        
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+        
+        /* Ensure all content fits within viewport */
+        img, table, .formula-box, .example-box {
+            max-width: 100%;
+        }
+        
+        /* Improve text readability on small screens */
+        p, li, td {
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 767px) {
+            p, li, td {
+                font-size: 1rem;
+            }
+        }
+        
+        /* Gold accent elements */
+        .gold-accent {
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .section-divider {
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary));
+            margin: 30px 0;
+            border-radius: 2px;
+        }
+        
+        /* Equation styling */
+        .equation {
+            font-family: 'Cambria Math', serif;
+            font-size: 1.2rem;
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        /* Reaction arrow styling */
+        .reaction-arrow {
+            display: inline-block;
+            margin: 0 10px;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated gradient background -->
+    <div class="gradient-bg"></div>
+    
+    <!-- Floating background elements -->
+    <div class="floating-bg" id="floatingBg"></div>
+    
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-atom"></i>
+            </div>
+            <h1>CHM 101/FSC 112: Chemical Equations & Stoichiometry</h1>
+            <p class="tagline">Mastering the Language of Chemical Reactions and Calculations</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="content-grid">
+            <section class="card intro-card wide-card">
+                <h2>Welcome to Chemical Equations & Stoichiometry!</h2>
+                <p>This comprehensive resource will guide you through the fundamental concepts of chemical reactions and calculations. Prepare to master:</p>
+                <ul>
+                    <li>Writing and balancing chemical equations</li>
+                    <li>Stoichiometric calculations with mole ratios</li>
+                    <li>Identifying and working with limiting reagents</li>
+                    <li>Calculating theoretical and percentage yields</li>
+                    <li>Step-by-step examples with detailed explanations</li>
+                    <li>Interactive practice with immediate feedback</li>
+                </ul>
+                <div class="visual-aid">
+                    <div class="aid-title">The Law of Conservation of Mass</div>
+                    <p>Atoms are neither created nor destroyed in chemical reactions. This fundamental principle is the basis for balancing chemical equations!</p>
+                </div>
+            </section>
+            
+            <section class="card wide-card">
+                <h2>Chemical Equations: The Language of Chemistry</h2>
+                
+                <div class="definition-box">
+                    <p><strong>Chemical Equation:</strong> A shorthand way of describing a chemical reaction using symbols and formulae to represent elements and compounds involved.</p>
+                </div>
+                
+                <div class="diagram-box">
+                    <h3>Combustion of Methane</h3>
+                    <img src="https://i.ibb.co/Cp32yV3w/Combustion-reaction-of-methane.jpg" alt="Combustion reaction of methane" class="diagram">
+                    <p class="equation">CH<sub>4</sub> + 2O<sub>2</sub> → CO<sub>2</sub> + 2H<sub>2</sub>O</p>
+                    <p><strong>Reactants:</strong> CH<sub>4</sub> and O<sub>2</sub> (left side of arrow)</p>
+                    <p><strong>Products:</strong> CO<sub>2</sub> and H<sub>2</sub>O (right side of arrow)</p>
+                </div>
+                
+                <div class="important-note">
+                    <p><i class="fas fa-lightbulb gold-accent"></i> <strong>Key Principle:</strong> In a chemical reaction, atoms are neither created nor destroyed. There must be the same number of each type of atom on both sides of the equation!</p>
+                </div>
+            </section>
+            
+            <section class="card wide-card">
+                <h2>Balancing Chemical Equations ⚖️</h2>
+                
+                <p>The process of making sure the number of atoms of each element is equal on both sides of a chemical equation.</p>
+                
+                <div class="step-box">
+                    <div class="step-number">1</div>
+                    <h3>Identify Reactants and Products</h3>
+                    <p>Write the unbalanced equation with correct chemical formulas.</p>
+                    <p class="equation">KClO<sub>3</sub> → KCl + O<sub>2</sub></p>
+                </div>
+                
+                <div class="step-box">
+                    <div class="step-number">2</div>
+                    <h3>Count Atoms on Each Side</h3>
+                    <p>Create an atom inventory:</p>
+                    <table>
+                        <tr>
+                            <th>Atom</th>
+                            <th>Reactants</th>
+                            <th>Products</th>
+                        </tr>
+                        <tr>
+                            <td>K</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>Cl</td>
+                            <td>1</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>O</td>
+                            <td>3</td>
+                            <td>2</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="step-box">
+                    <div class="step-number">3</div>
+                    <h3>Add Coefficients to Balance</h3>
+                    <p>Start with the most complicated molecule and adjust coefficients:</p>
+                    <p class="equation">2KClO<sub>3</sub> → 2KCl + 3O<sub>2</sub></p>
+                    
+                    <table>
+                        <tr>
+                            <th>Atom</th>
+                            <th>Reactants</th>
+                            <th>Products</th>
+                        </tr>
+                        <tr>
+                            <td>K</td>
+                            <td>2</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>Cl</td>
+                            <td>2</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>O</td>
+                            <td>6</td>
+                            <td>6</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="important-note">
+                    <p><i class="fas fa-exclamation-triangle gold-accent"></i> <strong>Important:</strong> Never change subscripts in chemical formulas when balancing equations! Only change coefficients.</p>
+                </div>
+                
+                <div class="example-box">
+                    <h4>Practice: Balance These Equations</h4>
+                    <p>1. N<sub>2</sub>O<sub>5</sub> → N<sub>2</sub>O<sub>4</sub> + O<sub>2</sub></p>
+                    <p>2. Cu + HNO<sub>3</sub> → Cu(NO<sub>3</sub>)<sub>2</sub> + NO + H<sub>2</sub>O</p>
+                    <div class="solution-step">
+                        <p><strong>Solutions:</strong></p>
+                        <p>1. 2N<sub>2</sub>O<sub>5</sub> → 2N<sub>2</sub>O<sub>4</sub> + O<sub>2</sub></p>
+                        <p>2. 3Cu + 8HNO<sub>3</sub> → 3Cu(NO<sub>3</sub>)<sub>2</sub> + 2NO + 4H<sub>2</sub>O</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="card wide-card">
+                <h2>Stoichiometric Calculations: The Mathematics of Chemistry</h2>
+                
+                <div class="definition-box">
+                    <p><strong>Stoichiometry:</strong> The calculation of quantities in chemical reactions based on the balanced equation.</p>
+                </div>
+                
+                <div class="diagram-box">
+                    <h3>The Mole Ratio Bridge</h3>
+                    <img src="https://i.ibb.co/wNrBVq5d/images.jpg" alt="Stoichiometry diagram" class="diagram">
+                    <p>Balanced equations provide mole ratios that connect reactants and products.</p>
+                </div>
+                
+                <div class="step-box">
+                    <h3>Example: Propane Combustion</h3>
+                    <p class="equation">C<sub>3</sub>H<sub>8</sub>(g) + 5O<sub>2</sub>(g) → 3CO<sub>2</sub>(g) + 4H<sub>2</sub>O(g)</p>
+                    
+                    <p><strong>Mole Ratios:</strong></p>
+                    <ul>
+                        <li>1 mole C<sub>3</sub>H<sub>8</sub> : 5 moles O<sub>2</sub></li>
+                        <li>1 mole C<sub>3</sub>H<sub>8</sub> : 3 moles CO<sub>2</sub></li>
+                        <li>1 mole C<sub>3</sub>H<sub>8</sub> : 4 moles H<sub>2</sub>O</li>
+                        <li>5 moles O<sub>2</sub> : 3 moles CO<sub>2</sub></li>
+                    </ul>
+                </div>
+                
+                <div class="step-box">
+                    <h3>Sample Calculation</h3>
+                    <p><strong>Problem:</strong> What mass of oxygen will react with 96.1 g of propane?</p>
+                    
+                    <div class="solution-step">
+                        <p><strong>Step 1:</strong> Write the balanced equation</p>
+                        <p class="equation">C<sub>3</sub>H<sub>8</sub> + 5O<sub>2</sub> → 3CO<sub>2</sub> + 4H<sub>2</sub>O</p>
+                    </div>
+                    
+                    <div class="solution-step">
+                        <p><strong>Step 2:</strong> Determine mole ratio from balanced equation</p>
+                        <p>1 mole C<sub>3</sub>H<sub>8</sub> reacts with 5 moles O<sub>2</sub></p>
+                    </div>
+                    
+                    <div class="solution-step">
+                        <p><strong>Step 3:</strong> Convert masses to moles</p>
+                        <p>Molar mass C<sub>3</sub>H<sub>8</sub> = 44.1 g/mol</p>
+                        <p>Molar mass O<sub>2</sub> = 32.0 g/mol</p>
+                        <p>5 moles O<sub>2</sub> = 5 × 32.0 = 160 g</p>
+                    </div>
+                    
+                    <div class="solution-step">
+                        <p><strong>Step 4:</strong> Set up proportion and solve</p>
+                        <p>44.1 g C<sub>3</sub>H<sub>8</sub> reacts with 160 g O<sub>2</sub></p>
+                        <p>96.1 g C<sub>3</sub>H<sub>8</sub> reacts with X g O<sub>2</sub></p>
+                        <p>X = (160 × 96.1) / 44.1 = 349 g O<sub>2</sub></p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="card wide-card">
+                <h2>Limiting Reagent: The Reactant That Runs Out First</h2>
+                
+                <div class="definition-box">
+                    <p><strong>Limiting Reagent:</strong> The reactant that is completely consumed in a chemical reaction, limiting the amount of product formed.</p>
+                </div>
+                
+                <div class="diagram-box">
+                    <h3>The Toast Sandwich Analogy</h3>
+                    <img src="https://i.ibb.co/d0cSRhc9/images-1.jpg" alt="Limiting reagent analogy" class="diagram">
+                    <p>If making a toast requires 2 bread slices and 1 egg, how many toasts can you make with 20 slices of bread and 12 eggs?</p>
+                    <p class="equation">2Bd + 1 egg → Bd<sub>2</sub>egg</p>
+                    <p>Bread is limiting: 20 slices make only 10 toasts, despite having 12 eggs!</p>
+                </div>
+                
+                <div class="step-box">
+                    <h3>Example: Ammonia Synthesis</h3>
+                    <p class="equation">N<sub>2</sub>(g) + 3H<sub>2</sub>(g) → 2NH<sub>3</sub>(g)</p>
+                    
+                    <p><strong>Problem:</strong> If we have 35.0 kg of N<sub>2</sub> and 15 kg of H<sub>2</sub>, which is the limiting reactant?</p>
+                    
+                    <div class="solution-step">
+                        <p><strong>Step 1:</strong> Convert masses to moles</p>
+                        <p>Molar mass N<sub>2</sub> = 28 g/mol, H<sub>2</sub> = 2 g/mol</p>
+                        <p>Moles N<sub>2</sub> = 35,000 g / 28 g/mol = 1250 mol</p>
+                        <p>Moles H<sub>2</sub> = 15,000 g / 2 g/mol = 7500 mol</p>
+                    </div>
+                    
+                    <div class="solution-step">
+                        <p><strong>Step 2:</strong> Use mole ratio from balanced equation</p>
+                        <p>Required ratio: 1 mol N<sub>2</sub> : 3 mol H<sub>2</sub></p>
+                        <p>For 1250 mol N<sub>2</sub>, needed H<sub>2</sub> = 1250 × 3 = 3750 mol</p>
+                    </div>
+                    
+                    <div class="solution-step">
+                        <p><strong>Step 3:</strong> Compare available vs. needed</p>
+                        <p>Available H<sub>2</sub>: 7500 mol</p>
+                        <p>Needed H<sub>2</sub>: 3750 mol</p>
+                        <p>Since we have more than enough H<sub>2</sub>, N<sub>2</sub> is the limiting reagent!</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="card wide-card">
+                <h2>Percentage Yield: Measuring Reaction Efficiency</h2>
+                
+                <div class="definition-box">
+                    <p><strong>Theoretical Yield:</strong> The maximum amount of product that can be formed from the limiting reactant.</p>
+                    <p><strong>Actual Yield:</strong> The amount of product actually obtained in an experiment.</p>
+                    <p><strong>Percentage Yield:</strong> (Actual Yield / Theoretical Yield) × 100%</p>
+                </div>
+                
+                <div class="formula-box">
+                    <p>% Yield = (Actual Yield / Theoretical Yield) × 100%</p>
+                </div>
+                
+                <div class="step-box">
+                    <h3>Example: Lithium Nitride Formation</h3>
+                    <p class="equation">6Li(s) + N<sub>2</sub>(g) → 2Li<sub>3</sub>N(s)</p>
+                    
+                    <p><strong>Problem:</strong> When 12.3 g of Li are heated with 33.6 g of N<sub>2</sub>:</p>
+                    <p>a) What is the theoretical yield of Li<sub>3</sub>N?</p>
+                    <p>b) If the actual yield is 5.89 g, what is the percentage yield?</p>
+                    
+                    <div class="solution-step">
+                        <p><strong>Step 1:</strong> Identify limiting reagent</p>
+                        <p>Molar mass Li = 6.9 g/mol, N<sub>2</sub> = 28 g/mol, Li<sub>3</sub>N = 34.8 g/mol</p>
+                        <p>Moles Li = 12.3 / 6.9 = 1.78 mol</p>
+                        <p>Moles N<sub>2</sub> = 33.6 / 28 = 1.2 mol</p>
+                        <p>From equation: 6 mol Li requires 1 mol N<sub>2</sub></p>
+                        <p>For 1.78 mol Li, needed N<sub>2</sub> = 1.78/6 = 0.297 mol</p>
+                        <p>We have 1.2 mol N<sub>2</sub>, so Li is limiting</p>
+                    </div>
+                    
+                    <div class="solution-step">
+                        <p><strong>Step 2:</strong> Calculate theoretical yield</p>
+                        <p>6 mol Li produces 2 mol Li<sub>3</sub>N</p>
+                        <p>1.78 mol Li produces (2/6) × 1.78 = 0.593 mol Li<sub>3</sub>N</p>
+                        <p>Theoretical yield = 0.593 × 34.8 = 20.6 g Li<sub>3</sub>N</p>
+                    </div>
+                    
+                    <div class="solution-step">
+                        <p><strong>Step 3:</strong> Calculate percentage yield</p>
+                        <p>% Yield = (5.89 / 20.6) × 100% = 28.6%</p>
+                    </div>
+                </div>
+                
+                <div class="important-note">
+                    <p><i class="fas fa-lightbulb gold-accent"></i> <strong>Why yields are less than 100%:</strong> Side reactions, incomplete reactions, product loss during purification, and measurement errors all contribute to actual yields being lower than theoretical yields.</p>
+                </div>
+            </section>
+            
+            <div class="section-divider"></div>
+            
+            <section class="card">
+                <h2>Practice Problems with Solutions ✍️</h2>
+                
+                <div class="example-box">
+                    <p><strong>Problem 1:</strong> Sodium bicarbonate reacts with citric acid: NaHCO<sub>3</sub>(aq) + C<sub>6</sub>H<sub>8</sub>O<sub>7</sub>(aq) → CO<sub>2</sub>(g) + H<sub>2</sub>O(l) + Na<sub>3</sub>C<sub>6</sub>H<sub>5</sub>O<sub>7</sub>(aq)</p>
+                    <p>a) Balance the equation.</p>
+                    <p>b) What mass of C<sub>6</sub>H<sub>8</sub>O<sub>7</sub> should be used for every 0.05 g of NaHCO<sub>3</sub>?</p>
+                    <div class="solution-step">
+                        <p><strong>Solution:</strong></p>
+                        <p>a) 3NaHCO<sub>3</sub> + C<sub>6</sub>H<sub>8</sub>O<sub>7</sub> → 3CO<sub>2</sub> + 3H<sub>2</sub>O + Na<sub>3</sub>C<sub>6</sub>H<sub>5</sub>O<sub>7</sub></p>
+                        <p>b) Molar mass NaHCO<sub>3</sub> = 84 g/mol, C<sub>6</sub>H<sub>8</sub>O<sub>7</sub> = 192 g/mol</p>
+                        <p>From equation: 3 mol NaHCO<sub>3</sub> reacts with 1 mol C<sub>6</sub>H<sub>8</sub>O<sub>7</sub></p>
+                        <p>0.05 g NaHCO<sub>3</sub> = 0.05/84 = 0.000595 mol</p>
+                        <p>Moles C<sub>6</sub>H<sub>8</sub>O<sub>7</sub> needed = 0.000595/3 = 0.000198 mol</p>
+                        <p>Mass = 0.000198 × 192 = 0.038 g</p>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <p><strong>Problem 2:</strong> Octane combustion: 2C<sub>8</sub>H<sub>18</sub>(l) + 25O<sub>2</sub>(g) → 16CO<sub>2</sub>(g) + 18H<sub>2</sub>O(l)</p>
+                    <p>a) How many moles of CO<sub>2</sub> are produced when 2.0 × 10<sup>10</sup> mol of C<sub>8</sub>H<sub>18</sub> is burnt?</p>
+                    <p>b) How many moles of oxygen are required to burn 4.4 × 10<sup>10</sup> mol of C<sub>8</sub>H<sub>18</sub>?</p>
+                    <div class="solution-step">
+                        <p><strong>Solution:</strong></p>
+                        <p>a) From equation: 2 mol C<sub>8</sub>H<sub>18</sub> produces 16 mol CO<sub>2</sub></p>
+                        <p>Mole ratio: 1:8</p>
+                        <p>CO<sub>2</sub> produced = 2.0 × 10<sup>10</sup> × 8 = 1.6 × 10<sup>11</sup> mol</p>
+                        <p>b) From equation: 2 mol C<sub>8</sub>H<sub>18</sub> requires 25 mol O<sub>2</sub></p>
+                        <p>Mole ratio: 1:12.5</p>
+                        <p>O<sub>2</sub> required = 4.4 × 10<sup>10</sup> × 12.5 = 5.5 × 10<sup>11</sup> mol</p>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <p><strong>Problem 3:</strong> Nitric oxide reacts with oxygen: 2NO(g) + O<sub>2</sub>(g) → 2NO<sub>2</sub>(g)</p>
+                    <p>If 0.886 mole of NO is mixed with 0.503 mole of O<sub>2</sub>:</p>
+                    <p>a) Which is the limiting reagent?</p>
+                    <p>b) How many moles of NO<sub>2</sub> are produced?</p>
+                    <div class="solution-step">
+                        <p><strong>Solution:</strong></p>
+                        <p>a) From equation: 2 mol NO requires 1 mol O<sub>2</sub></p>
+                        <p>For 0.886 mol NO, needed O<sub>2</sub> = 0.886/2 = 0.443 mol</p>
+                        <p>Available O<sub>2</sub> = 0.503 mol (more than needed)</p>
+                        <p>Therefore, NO is the limiting reagent</p>
+                        <p>b) From equation: 2 mol NO produces 2 mol NO<sub>2</sub> (1:1 ratio)</p>
+                        <p>NO<sub>2</sub> produced = 0.886 mol</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="card">
+                <h2>Common Pitfalls and Expert Tips ⚠️</h2>
+                
+                <div class="concept-box">
+                    <h3><i class="fas fa-exclamation-triangle gold-accent"></i> Pitfall 1: Changing Subscripts Instead of Coefficients</h3>
+                    <p>When balancing equations, never change the subscripts in chemical formulas (like H<sub>2</sub>O to H<sub>2</sub>O<sub>2</sub>). Only change coefficients in front of formulas.</p>
+                </div>
+                
+                <div class="concept-box">
+                    <h3><i class="fas fa-exclamation-triangle gold-accent"></i> Pitfall 2: Forgetting to Balance the Equation First</h3>
+                    <p>Always balance the chemical equation before attempting any stoichiometric calculations. Unbalanced equations give incorrect mole ratios!</p>
+                </div>
+                
+                <div class="concept-box">
+                    <h3><i class="fas fa-exclamation-triangle gold-accent"></i> Pitfall 3: Confusing Limiting Reagent with Excess Reagent</h3>
+                    <p>The limiting reagent is completely consumed, while the excess reagent is leftover after the reaction. Always calculate which one runs out first.</p>
+                </div>
+                
+                <div class="concept-box">
+                    <h3><i class="fas fa-lightbulb gold-accent"></i> Tip 1: Use the "Atom Inventory" Method for Balancing</h3>
+                    <p>Create a table counting atoms on each side. Start balancing with the most complicated molecule (usually the one with the most atoms).</p>
+                </div>
+                
+                <div class="concept-box">
+                    <h3><i class="fas fa-lightbulb gold-accent"></i> Tip 2: Memorize Key Molar Masses</h3>
+                    <p>Know common molar masses: H<sub>2</sub>O = 18 g/mol, CO<sub>2</sub> = 44 g/mol, O<sub>2</sub> = 32 g/mol, N<sub>2</sub> = 28 g/mol. This speeds up calculations.</p>
+                </div>
+                
+                <div class="concept-box">
+                    <h3><i class="fas fa-lightbulb gold-accent"></i> Tip 3: Always Include Units in Calculations</h3>
+                    <p>Writing units (g, mol, g/mol) helps track what you're calculating and catches errors when units don't cancel properly.</p>
+                </div>
+            </section>
+            
+            <section class="card tutor-section wide-card">
+                <h2>Your Chemistry Tutor</h2>
+                
+                <div class="tutor-info">
+                    <div class="tutor-avatar">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <div class="tutor-details">
+                        <h3>Kennis</h3>
+                        <p><strong>100-Level MBBS Student</strong></p>
+                        <p><strong>University of Lagos (UNILAG)</strong></p>
+                    </div>
+                </div>
+                
+                <a href="https://wa.me/qr/5XXPE2NTKQGSO1" class="whatsapp-btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Contact on WhatsApp
+                </a>
+            </section>
+            
+            <section class="card">
+                <h2>Key Concepts Recap 🎓</h2>
+                
+                <div class="principle-box">
+                    <h3>Chemical Equations</h3>
+                    <p>Reactants → Products | Must obey Law of Conservation of Mass</p>
+                </div>
+                
+                <div class="principle-box">
+                    <h3>Balancing Equations</h3>
+                    <p>1. Write unbalanced equation<br>2. Count atoms on each side<br>3. Add coefficients to balance<br>4. NEVER change subscripts!</p>
+                </div>
+                
+                <div class="principle-box">
+                    <h3>Stoichiometry</h3>
+                    <p>Use mole ratios from balanced equations to convert between amounts of reactants and products.</p>
+                </div>
+                
+                <div class="principle-box">
+                    <h3>Limiting Reagent</h3>
+                    <p>The reactant that determines how much product can be formed. Compare mole ratios to identify.</p>
+                </div>
+                
+                <div class="principle-box">
+                    <h3>Percentage Yield</h3>
+                    <p>% Yield = (Actual Yield / Theoretical Yield) × 100%</p>
+                    <p>Measures efficiency of a chemical reaction.</p>
+                </div>
+            </section>
+            
+            <section class="card wide-card">
+                <h2>Learning Resources</h2>
+                <p>Enhance your understanding with these curated resources:</p>
+                
+                <div class="resource-links">
+                    <a href="https://youtu.be/mJ41N_i6xXk?si=-0xczx6vtBGBJXbI" class="btn" target="_blank">
+                        <i class="fab fa-youtube"></i> Balancing Chemical Equations
+                    </a>
+                    
+                    <a href="https://youtu.be/jh5s9lrpInc?si=4KUGUnjLRrRHUqOY" class="btn btn-accent" target="_blank">
+                        <i class="fab fa-youtube"></i> Stoichiometry & Limiting Reagents
+                    </a>
+                </div>
+            </section>
+        </div>
+        
+        <section class="quiz-section wide-card">
+            <h2>Quiz Time! Test Your Knowledge 🧠</h2>
+            <p>Challenge yourself with 25 questions about Chemical Equations & Stoichiometry!</p>
+            
+            <div class="quiz-instructions">
+                <h3><i class="fas fa-info-circle"></i> Quiz Instructions</h3>
+                <p><strong>Topic:</strong> Chemical Equations, Stoichiometry, Limiting Reagents, Percentage Yield</p>
+                <p><strong>Duration:</strong> 20 minutes ⏱️</p>
+                <p><strong>Questions:</strong> 25 multiple-choice questions</p>
+                <p>After submission, you'll receive detailed feedback with your score, percentage, and personalized analysis.</p>
+                <p><strong>Remember:</strong> This is a learning tool to help you identify strengths and areas for improvement.</p>
+            </div>
+            
+            <button id="startQuiz" class="btn">
+                <i class="fas fa-play"></i> Start Quiz Now
+            </button>
+            
+            <div id="quizContainer" class="quiz-container hidden">
+                <div class="timer" id="timer">20:00</div>
+                
+                <div id="questions">
+                    <!-- Questions will be inserted here by JavaScript -->
+                </div>
+                
+                <button id="submitQuiz" class="btn btn-success">
+                    <i class="fas fa-paper-plane"></i> Submit Quiz
+                </button>
+            </div>
+            
+            <div id="results" class="results hidden">
+                <!-- Results will be displayed here -->
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>CHM 101/FSC 112 Learning Resource &copy; 2025</p>
+            <p>Master the language of chemical reactions and calculations</p>
+        </div>
+    </footer>
+
+    <script>
+        // Create floating background elements
+        function createFloatingElements() {
+            const floatingBg = document.getElementById('floatingBg');
+            const chemIcons = [
+                'fa-atom', 'fa-flask', 'fa-vial', 'fa-fire', 
+                'fa-tint', 'fa-cloud', 'fa-balance-scale', 'fa-calculator',
+                'fa-percentage', 'fa-superscript', 'fa-subscript', 'fa-equals',
+                'fa-arrow-right', 'fa-plus', 'fa-times', 'fa-divide',
+                'fa-vial-virus', 'fa-poop', 'fa-gas-pump', 'fa-radiation'
+            ];
+            
+            // Create floating icons
+            for (let i = 0; i < 25; i++) {
+                const icon = document.createElement('i');
+                icon.className = `floating-element fas ${chemIcons[Math.floor(Math.random() * chemIcons.length)]}`;
+                icon.style.left = `${Math.random() * 100}%`;
+                icon.style.animationDelay = `${Math.random() * 20}s`;
+                icon.style.fontSize = `${Math.random() * 30 + 15}px`;
+                floatingBg.appendChild(icon);
+            }
+            
+            // Create floating bubbles
+            for (let i = 0; i < 20; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'floating-bubble';
+                bubble.style.left = `${Math.random() * 100}%`;
+                bubble.style.animationDelay = `${Math.random() * 15}s`;
+                bubble.style.width = `${Math.random() * 50 + 15}px`;
+                bubble.style.height = bubble.style.width;
+                floatingBg.appendChild(bubble);
+            }
+        }
+        
+        // Initialize floating elements
+        createFloatingElements();
+
+        // Quiz questions array (25 questions)
+        const quizQuestions = [
+            {
+                question: "What is a chemical equation?",
+                options: [
+                    "A mathematical formula for calculating moles",
+                    "A shorthand way of describing a chemical reaction",
+                    "A list of elements in a compound",
+                    "A method for balancing atoms"
+                ],
+                correct: 1,
+                explanation: "A chemical equation is a shorthand way of describing a chemical reaction using symbols and formulas to represent the elements and compounds involved."
+            },
+            {
+                question: "Which side of the arrow in a chemical equation contains the reactants?",
+                options: [
+                    "Left side",
+                    "Right side",
+                    "Above the arrow",
+                    "Below the arrow"
+                ],
+                correct: 0,
+                explanation: "In a chemical equation, reactants are on the left side of the arrow, and products are on the right side."
+            },
+            {
+                question: "What is the Law of Conservation of Mass?",
+                options: [
+                    "Mass can be created but not destroyed",
+                    "Atoms are neither created nor destroyed in chemical reactions",
+                    "Energy is conserved in chemical reactions",
+                    "Matter can be converted to energy"
+                ],
+                correct: 1,
+                explanation: "The Law of Conservation of Mass states that atoms are neither created nor destroyed in chemical reactions. This is why we must balance chemical equations."
+            },
+            {
+                question: "When balancing chemical equations, what can you change?",
+                options: [
+                    "Subscripts in chemical formulas",
+                    "Chemical formulas themselves",
+                    "Coefficients in front of formulas",
+                    "The state of matter symbols"
+                ],
+                correct: 2,
+                explanation: "When balancing equations, you can only change the coefficients (numbers in front of formulas), not the subscripts within formulas."
+            },
+            {
+                question: "What does the coefficient in a balanced chemical equation represent?",
+                options: [
+                    "The number of atoms in a molecule",
+                    "The number of molecules or moles of a substance",
+                    "The charge on an ion",
+                    "The oxidation state of an element"
+                ],
+                correct: 1,
+                explanation: "Coefficients in balanced chemical equations represent the number of molecules or moles of each substance involved in the reaction."
+            },
+            {
+                question: "What is stoichiometry?",
+                options: [
+                    "The study of atomic structure",
+                    "The calculation of quantities in chemical reactions",
+                    "The balancing of chemical equations",
+                    "The identification of elements"
+                ],
+                correct: 1,
+                explanation: "Stoichiometry is the calculation of quantities in chemical reactions based on the balanced equation."
+            },
+            {
+                question: "In the reaction CH₄ + 2O₂ → CO₂ + 2H₂O, how many moles of oxygen are needed to react with 3 moles of methane?",
+                options: [
+                    "2 moles",
+                    "3 moles",
+                    "6 moles",
+                    "1.5 moles"
+                ],
+                correct: 2,
+                explanation: "From the balanced equation, 1 mole of CH₄ reacts with 2 moles of O₂. So 3 moles of CH₄ would react with 3 × 2 = 6 moles of O₂."
+            },
+            {
+                question: "What is a limiting reagent?",
+                options: [
+                    "The reactant that is in excess",
+                    "The reactant that is completely consumed first",
+                    "The product that forms the least amount",
+                    "The catalyst that speeds up the reaction"
+                ],
+                correct: 1,
+                explanation: "The limiting reagent is the reactant that is completely consumed first in a chemical reaction, limiting the amount of product that can be formed."
+            },
+            {
+                question: "If you have 4 moles of H₂ and 2 moles of O₂ for the reaction 2H₂ + O₂ → 2H₂O, which is the limiting reagent?",
+                options: [
+                    "H₂",
+                    "O₂",
+                    "Neither, they are in perfect ratio",
+                    "H₂O"
+                ],
+                correct: 1,
+                explanation: "From the equation, 2 moles of H₂ react with 1 mole of O₂. With 4 moles of H₂, you need 2 moles of O₂. Since you have exactly 2 moles of O₂, neither is limiting in this case."
+            },
+            {
+                question: "What is theoretical yield?",
+                options: [
+                    "The actual amount of product obtained",
+                    "The maximum possible amount of product",
+                    "The percentage of product formed",
+                    "The amount of limiting reagent"
+                ],
+                correct: 1,
+                explanation: "Theoretical yield is the maximum amount of product that can be formed from the limiting reactant, calculated from the balanced equation."
+            },
+            {
+                question: "What is the formula for percentage yield?",
+                options: [
+                    "(Theoretical yield / Actual yield) × 100%",
+                    "(Actual yield / Theoretical yield) × 100%",
+                    "(Actual yield / Limiting reagent) × 100%",
+                    "(Theoretical yield / Limiting reagent) × 100%"
+                ],
+                correct: 1,
+                explanation: "Percentage yield = (Actual yield / Theoretical yield) × 100%"
+            },
+            {
+                question: "If the actual yield is 15 g and the theoretical yield is 20 g, what is the percentage yield?",
+                options: [
+                    "75%",
+                    "133%",
+                    "25%",
+                    "50%"
+                ],
+                correct: 0,
+                explanation: "% Yield = (15/20) × 100% = 75%"
+            },
+            {
+                question: "What is the molar mass of H₂O?",
+                options: [
+                    "18 g/mol",
+                    "16 g/mol",
+                    "34 g/mol",
+                    "2 g/mol"
+                ],
+                correct: 0,
+                explanation: "H₂O: 2 H atoms (2 × 1 = 2) + 1 O atom (16) = 18 g/mol"
+            },
+            {
+                question: "How many atoms of oxygen are in 2H₂SO₄?",
+                options: [
+                    "2",
+                    "4",
+                    "8",
+                    "1"
+                ],
+                correct: 2,
+                explanation: "H₂SO₄ has 4 oxygen atoms. With coefficient 2, total oxygen atoms = 2 × 4 = 8"
+            },
+            {
+                question: "Which of these is a balanced equation?",
+                options: [
+                    "H₂ + O₂ → H₂O",
+                    "2H₂ + O₂ → 2H₂O",
+                    "H₂ + 2O₂ → H₂O",
+                    "2H₂ + 2O₂ → 2H₂O"
+                ],
+                correct: 1,
+                explanation: "2H₂ + O₂ → 2H₂O is balanced: 4 H on left, 4 H on right; 2 O on left, 2 O on right"
+            },
+            {
+                question: "What information does a balanced chemical equation provide?",
+                options: [
+                    "The speed of the reaction",
+                    "The energy change in the reaction",
+                    "The mole ratios of reactants and products",
+                    "The color of the products"
+                ],
+                correct: 2,
+                explanation: "A balanced chemical equation provides the mole ratios of reactants and products, which is essential for stoichiometric calculations."
+            },
+            {
+                question: "In stoichiometry, what is the first step after reading a problem?",
+                options: [
+                    "Convert all masses to moles",
+                    "Balance the chemical equation",
+                    "Identify the limiting reagent",
+                    "Calculate the percentage yield"
+                ],
+                correct: 1,
+                explanation: "The first step in any stoichiometry problem is to write and balance the chemical equation (if not already given)."
+            },
+            {
+                question: "What does it mean if a reaction has 100% yield?",
+                options: [
+                    "The reaction was very fast",
+                    "The actual yield equals the theoretical yield",
+                    "No limiting reagent was present",
+                    "All reactants were completely consumed"
+                ],
+                correct: 1,
+                explanation: "100% yield means the actual yield equals the theoretical yield. In practice, this is rarely achieved due to side reactions, incomplete reactions, or product loss."
+            },
+            {
+                question: "Which of these factors does NOT affect percentage yield?",
+                options: [
+                    "Side reactions",
+                    "Incomplete reactions",
+                    "Product loss during purification",
+                    "The color of the reactants"
+                ],
+                correct: 3,
+                explanation: "The color of reactants does not affect percentage yield. Side reactions, incomplete reactions, and product loss during purification all decrease the actual yield."
+            },
+            {
+                question: "In the reaction N₂ + 3H₂ → 2NH₃, how many moles of NH₃ are produced from 6 moles of H₂?",
+                options: [
+                    "2 moles",
+                    "4 moles",
+                    "6 moles",
+                    "3 moles"
+                ],
+                correct: 1,
+                explanation: "From the equation, 3 moles of H₂ produce 2 moles of NH₃. So 6 moles of H₂ would produce (6/3) × 2 = 4 moles of NH₃."
+            },
+            {
+                question: "What is the purpose of balancing chemical equations?",
+                options: [
+                    "To make the equation look symmetrical",
+                    "To obey the Law of Conservation of Mass",
+                    "To calculate reaction energy",
+                    "To determine reaction speed"
+                ],
+                correct: 1,
+                explanation: "We balance chemical equations to obey the Law of Conservation of Mass, ensuring the same number of each type of atom on both sides."
+            },
+            {
+                question: "When identifying the limiting reagent, what should you compare?",
+                options: [
+                    "The masses of all reactants",
+                    "The mole ratios of reactants to the balanced equation",
+                    "The volumes of gaseous reactants",
+                    "The colors of the reactants"
+                ],
+                correct: 1,
+                explanation: "To identify the limiting reagent, compare the mole ratios of the reactants you have to the mole ratios required by the balanced equation."
+            },
+            {
+                question: "What is excess reagent?",
+                options: [
+                    "The reactant that is completely consumed",
+                    "The reactant that is left over after the reaction",
+                    "The product that forms in excess",
+                    "A catalyst that is not consumed"
+                ],
+                correct: 1,
+                explanation: "The excess reagent is the reactant that is left over after the reaction is complete because it was present in more than the required amount."
+            },
+            {
+                question: "What is the molar mass of CO₂?",
+                options: [
+                    "28 g/mol",
+                    "32 g/mol",
+                    "44 g/mol",
+                    "12 g/mol"
+                ],
+                correct: 2,
+                explanation: "CO₂: C (12) + 2O (2 × 16 = 32) = 44 g/mol"
+            },
+            {
+                question: "Why are actual yields usually less than theoretical yields?",
+                options: [
+                    "Because of measurement errors",
+                    "Because of side reactions",
+                    "Because of incomplete reactions",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Actual yields are usually less than theoretical yields due to measurement errors, side reactions, incomplete reactions, and product loss during purification."
+            }
+        ];
+
+        // Quiz functionality
+        document.getElementById('startQuiz').addEventListener('click', startQuiz);
+        document.getElementById('submitQuiz').addEventListener('click', submitQuiz);
+
+        let timeLeft = 20 * 60; // 20 minutes in seconds
+        let timerInterval;
+        let userAnswers = [];
+
+        function startQuiz() {
+            document.getElementById('startQuiz').classList.add('hidden');
+            document.getElementById('quizContainer').classList.remove('hidden');
+            
+            // Display questions
+            const questionsContainer = document.getElementById('questions');
+            quizQuestions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.innerHTML = `
+                    <h3>Question ${index + 1}</h3>
+                    <p>${q.question}</p>
+                    <div class="options">
+                        ${q.options.map((option, optIndex) => `
+                            <div class="option" data-question="${index}" data-option="${optIndex}">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+                questionsContainer.appendChild(questionDiv);
+            });
+
+            // Add event listeners to options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', selectOption);
+            });
+
+            // Start timer
+            timerInterval = setInterval(updateTimer, 1000);
+            
+            // Initialize user answers array
+            userAnswers = new Array(quizQuestions.length).fill(-1);
+        }
+
+        function selectOption(e) {
+            const questionIndex = parseInt(e.target.getAttribute('data-question'));
+            const optionIndex = parseInt(e.target.getAttribute('data-option'));
+            
+            // Remove selected class from all options in this question
+            const options = document.querySelectorAll(`.option[data-question="${questionIndex}"]`);
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selected class to clicked option
+            e.target.classList.add('selected');
+            
+            // Store user's answer
+            userAnswers[questionIndex] = optionIndex;
+        }
+
+        function updateTimer() {
+            timeLeft--;
+            
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            
+            document.getElementById('timer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                submitQuiz();
+            }
+        }
+
+        function submitQuiz() {
+            clearInterval(timerInterval);
+            
+            // Calculate score
+            let correctCount = 0;
+            quizQuestions.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) {
+                    correctCount++;
+                }
+            });
+            
+            const score = correctCount;
+            const percentage = Math.round((correctCount / quizQuestions.length) * 100);
+            
+            // Display results
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.classList.remove('hidden');
+            
+            // Generate feedback
+            let strengths = [];
+            let improvements = [];
+            
+            // Analyze performance by category
+            let basicConceptsCorrect = 0, basicConceptsTotal = 0;
+            let balancingCorrect = 0, balancingTotal = 0;
+            let stoichiometryCorrect = 0, stoichiometryTotal = 0;
+            let yieldCorrect = 0, yieldTotal = 0;
+            
+            quizQuestions.forEach((q, index) => {
+                // Categorize questions
+                const questionText = q.question.toLowerCase();
+                if (questionText.includes("what is") || questionText.includes("law") || questionText.includes("purpose") || questionText.includes("describe")) {
+                    basicConceptsTotal++;
+                    if (userAnswers[index] === q.correct) basicConceptsCorrect++;
+                } else if (questionText.includes("balance") || questionText.includes("coefficient") || questionText.includes("subscript")) {
+                    balancingTotal++;
+                    if (userAnswers[index] === q.correct) balancingCorrect++;
+                } else if (questionText.includes("mole") || questionText.includes("stoichiometry") || questionText.includes("limiting") || questionText.includes("excess")) {
+                    stoichiometryTotal++;
+                    if (userAnswers[index] === q.correct) stoichiometryCorrect++;
+                } else if (questionText.includes("yield") || questionText.includes("theoretical") || questionText.includes("actual")) {
+                    yieldTotal++;
+                    if (userAnswers[index] === q.correct) yieldCorrect++;
+                }
+            });
+            
+            // Determine strengths and areas for improvement
+            if (basicConceptsTotal > 0 && basicConceptsCorrect / basicConceptsTotal >= 0.7) strengths.push("understanding basic chemical concepts");
+            else if (basicConceptsTotal > 0) improvements.push("reviewing fundamental concepts like chemical equations and conservation of mass");
+            
+            if (balancingTotal > 0 && balancingCorrect / balancingTotal >= 0.7) strengths.push("balancing chemical equations");
+            else if (balancingTotal > 0) improvements.push("practicing equation balancing techniques");
+            
+            if (stoichiometryTotal > 0 && stoichiometryCorrect / stoichiometryTotal >= 0.7) strengths.push("stoichiometric calculations and limiting reagent problems");
+            else if (stoichiometryTotal > 0) improvements.push("working on mole ratio calculations and limiting reagent identification");
+            
+            if (yieldTotal > 0 && yieldCorrect / yieldTotal >= 0.7) strengths.push("understanding yield calculations");
+            else if (yieldTotal > 0) improvements.push("practicing theoretical and percentage yield calculations");
+            
+            // If no specific strengths identified, add generic ones
+            if (strengths.length === 0) {
+                strengths = ["basic understanding of chemical concepts"];
+            }
+            
+            // Generate detailed feedback with explanations for incorrect answers
+            let detailedFeedback = "<h3>Question Review</h3>";
+            quizQuestions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === q.correct;
+                
+                detailedFeedback += `
+                    <div class="feedback">
+                        <p><strong>Question ${index + 1}:</strong> ${q.question}</p>
+                        <p>Your answer: ${userAnswer !== -1 ? q.options[userAnswer] : "Not answered"} 
+                        ${isCorrect ? '<span style="color:green">✓ Correct</span>' : '<span style="color:red">✗ Incorrect</span>'}</p>
+                        ${!isCorrect ? `<p>Correct answer: ${q.options[q.correct]}</p>` : ''}
+                        <p><strong>Explanation:</strong> ${q.explanation}</p>
+                    </div>
+                `;
+            });
+            
+            resultsContainer.innerHTML = `
+                <h2>Quiz Results</h2>
+                <div class="score">${score}/${quizQuestions.length} (${percentage}%)</div>
+                
+                <div class="feedback">
+                    <h3>Performance Analysis</h3>
+                    <p><span class="strength">Strengths:</span> ${strengths.join(', ')}</p>
+                    <p><span class="improvement">Areas for Improvement:</span> ${improvements.join(', ')}</p>
+                    
+                    <h4>How to Improve:</h4>
+                    <ul>
+                        <li>Review the balancing equations section and practice with different examples</li>
+                        <li>Work through stoichiometry problems step by step</li>
+                        <li>Watch the recommended videos on balancing equations and limiting reagents</li>
+                        <li>Practice calculating theoretical and percentage yields</li>
+                    </ul>
+                </div>
+                
+                <p>${percentage >= 80 ? 'Excellent work! You have mastered Chemical Equations & Stoichiometry concepts.' : 
+                    percentage >= 60 ? 'Good job! You understand the key concepts but could benefit from more practice.' : 
+                    'Keep studying! Review the material and try the quiz again to improve your understanding.'}</p>
+                
+                ${detailedFeedback}
+                
+                <button id="retryQuiz" class="btn">Retry Quiz</button>
+            `;
+            
+            document.getElementById('retryQuiz').addEventListener('click', function() {
+                location.reload();
+            });
+            
+            // Scroll to results
+            resultsContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
